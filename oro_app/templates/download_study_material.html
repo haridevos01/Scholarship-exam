@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Study Material</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .close-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .study-materials {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .material {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .download-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .download-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="close-btn" onclick="window.history.back();">×</div>
+
+    <div class="container">
+        <h2>Download Study Material</h2>
+        
+        <div class="study-materials">
+            <div class="material">
+                <span>Mathematics - Algebra</span>
+                <a href="#" class="download-btn" download>Download</a>
+            </div>
+            <div class="material">
+                <span>Physics - Mechanics</span>
+                <a href="#" class="download-btn" download>Download</a>
+            </div>
+            <div class="material">
+                <span>Chemistry - Organic Basics</span>
+                <a href="#" class="download-btn" download>Download</a>
+            </div>
+            <div class="material">
+                <span>Biology - Human Anatomy</span>
+                <a href="#" class="download-btn" download>Download</a>
+            </div>
+            <div class="material">
+                <span>English - Grammar Guide</span>
+                <a href="#" class="download-btn" download>Download</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

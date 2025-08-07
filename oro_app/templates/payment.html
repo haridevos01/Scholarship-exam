@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oro Scholarship - Payment</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://images.pexels.com/photos/8199557/pexels-photo-8199557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: red;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .close-button:hover {
+            background: darkred;
+        }
+        .payment-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+        }
+        .card-details div {
+            width: 48%;
+        }
+        .payment-methods {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        .payment-methods img {
+            width: 50px;
+            height: auto;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <button class="close-button" onclick="window.location.href='{% url 'student_dashboard' %}';">&times;</button>
+    <div class="payment-container">
+        <h2>PAYMENT</h2>
+        <div class="payment-methods">
+            <img src="https://pngimg.com/uploads/visa/visa_PNG4.png" alt="Visa">
+            <img src="https://pngimg.com/uploads/mastercard/mastercard_PNG23.png" alt="MasterCard">
+            <img src="https://th.bing.com/th/id/OIP.NyPlJLI3PuB0PMuO8c24NwHaEt?rs=1&pid=ImgDetMain" alt="American Express">
+            <img src="https://th.bing.com/th/id/OIP.pNdXXJH_-Rd4rbcY72ZrzgHaHa?rs=1&pid=ImgDetMain" alt="Discover">
+            <img src="https://th.bing.com/th/id/OIP.tJ9KaNvfBq8ez-wPb8AypAHaDE?rs=1&pid=ImgDetMain" alt="Google Pay">
+            <img src="https://logodownload.org/wp-content/uploads/2014/10/paypal-logo-0.png" alt="PayPal">
+        </div>
+        <form action="/process_payment/" method="POST">
+            {% csrf_token %}
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="amount">Amount (USD)</label>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+            
+            <label for="card">Card Number</label>
+            <input type="text" id="card" name="card" placeholder="1234 5678 9012 3456" required>
+            
+            <div class="card-details">
+                <div>
+                    <label for="expiry">Expiry Date</label>
+                    <input type="month" id="expiry" name="expiry" required>
+                </div>
+                <div>
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                </div>
+            </div>
+            
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+</body>
+</html>

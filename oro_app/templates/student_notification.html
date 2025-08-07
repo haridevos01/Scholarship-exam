@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Notifications</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+
+    <header style="background-color: #007bff; color: white; text-align: center; padding: 15px;">
+        <h1>Latest Notifications</h1>
+    </header>
+
+    <main style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+
+        <section style="
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        ">
+            <h2 style="
+                text-align: center;
+                color: #007bff;
+                font-size: 24px;
+                margin-bottom: 15px;
+            ">Latest Notifications</h2>
+            
+            {% if notifications %}
+                <ul style="list-style: none; padding: 0;">
+                    {% for notification in notifications %}
+                        <li style="
+                            background: white;
+                            padding: 15px;
+                            margin-bottom: 10px;
+                            border-left: 5px solid #007bff;
+                            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            border-radius: 5px;
+                        ">
+                            <span style="color: #007bff; font-size: 20px;">🔔</span>
+                            <strong style="color: #333; font-weight: bold;">
+                                {{ notification.created_at|date:"d M Y, H:i" }}
+                            </strong>: 
+                            {{ notification.message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p style="text-align: center; color: #888; font-style: italic;">No notifications available.</p>
+            {% endif %}
+        </section>
+
+    </main>
+
+    <footer style="
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    ">
+        <p>&copy; 2025 ORO Scholarship Exam. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

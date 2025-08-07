@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Application View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .application-details {
+            margin-top: 20px;
+        }
+        .detail {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .detail strong {
+            display: inline-block;
+            width: 200px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Applications</h2>
+
+        {% if applications %}
+            {% for application in applications %}
+                <div class="application-details">
+                    <div class="detail"><strong>Full Name:</strong> {{ application.full_name }}</div>
+                    <div class="detail"><strong>Address:</strong> {{ application.address }}</div>
+                    <div class="detail"><strong>Date of Birth:</strong> {{ application.dob }}</div>
+                    <div class="detail"><strong>Guardian Name:</strong> {{ application.guardian_name }}</div>
+                    <div class="detail"><strong>Email:</strong> {{ application.email }}</div>
+                    <div class="detail"><strong>Phone Number:</strong> {{ application.phone_number }}</div>
+                    <div class="detail"><strong>Gender:</strong> {{ application.gender }}</div>
+                    <div class="detail"><strong>School Name:</strong> {{ application.school_name }}</div>
+                    <div class="detail"><strong>Grade/Class:</strong> {{ application.grade_class }}</div>
+                    <div class="detail"><strong>Academic Score:</strong> {{ application.academic_score }}</div>
+                    <div class="detail"><strong>ID Proof:</strong> <a href="{{ application.id_proof.url }}" target="_blank">View</a></div>
+                    <div class="detail"><strong>Photo:</strong> <a href="{{ application.photo.url }}" target="_blank">View</a></div>
+                    <div class="detail"><strong>Income Certificate:</strong> <a href="{{ application.income_certificate.url }}" target="_blank">View</a></div>
+                    <div class="detail"><strong>Caste Certificate:</strong> <a href="{{ application.caste_certificate.url }}" target="_blank">View</a></div>
+                    <div class="detail"><strong>Nativity Certificate:</strong> <a href="{{ application.nativity_certificate.url }}" target="_blank">View</a></div>
+                    <div class="detail"><strong>Marklist:</strong> <a href="{{ application.marklist.url }}" target="_blank">View</a></div>
+                    <div class="detail"><strong>Signature:</strong> <a href="{{ application.signature.url }}" target="_blank">View</a></div>
+                    <a href="{% url 'edit_application' application.id %}" class="btn btn-primary">Edit Application</a> 
+                </div>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <p>No applications found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

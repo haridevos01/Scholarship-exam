@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/free-photo/graduation-cap-sits-top-stack-books_188544-38727.jpg?t=st=1738131080~exp=1738134680~hmac=9600d5b036b0cb4cde6f896bbf52a429444eef0da01d998f7022bda0bf657448&w=1380');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .close-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .icons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            gap: 5px;
+        }
+
+        .icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px; /* Reduce space between icons */
+            margin-top: 10px; /* Adjust margin */
+        }
+        
+
+        .icon-btn:hover {
+            color: #007bff;
+        }
+        .icon-btn {
+            font-size: 20px; /* Reduce icon size slightly */
+    </style>
+</head>
+<body>
+
+    <div class="close-btn" onclick="goBack()">×</div>
+
+    <div class="container">
+        <h2>APPLICATION MANAGEMENT</h2>
+        
+        {% if applications %}
+        {% for application in applications %}
+
+            <div class="card">
+                <h5>Application Status: <span class="badge bg-info">Pending</span></h5><br>  
+                <p>Last Updated: January 29, 2025</p>            
+                <div class="detail"><strong>Full Name:</strong> {{ application.full_name }}</div>
+                <div class="detail"><strong>Email:</strong> {{ application.email }}</div>
+                <div class="detail"><strong>Phone Number:</strong> {{ application.phone_number }}</div>
+                
+            
+
+         <div class="icons">
+            <a href="{% url 'student_application_view' pk=application.pk %}" class="icon-btn" title="View Application">
+                <i class="bi bi-eye"></i>
+           </a>
+            <a href="{% url 'edit_application' application.id %}" class="icon-btn text-warning" title="Edit Application">
+                <i class="bi bi-pencil-square"></i>
+            </a> 
+            <a href="{% url 'delete_application' %}" class="icon-btn text-danger" title="Delete Application" onclick="return confirm('Are you sure you want to delete this application?');">
+                <i class="bi bi-trash"></i>
+            </a>
+        </div>
+    </div>
+        {% endfor %}
+        {% else %}
+            <p>No applications found.</p>
+        {% endif %}
+        </div>
+    </div>
+
+    
+    </div>
+
+ 
+    
+    <script>
+        function goBack() {
+            window.location.href = "{% url 'student_dashboard' %}";
+        }
+    </script>
+
+</body>
+</html>

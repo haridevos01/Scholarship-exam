@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Exam Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #1576e6;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #1576e6;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #1576e6;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scholarship Exam Results</h1>
+        <table>
+            <tr>
+                <th>Student Name</th>
+                <th>Exam Name</th>
+                <th>Score</th>
+                <th>Status</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.student_name }}</td>
+                <td>{{ result.exam_name }}</td>
+                <td>{{ result.score }}</td>
+                <td>{% if result.passed %} Passed {% else %} Failed {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{% url 'student_dashboard' %}" class="btn">Back to Home</a>
+    </div>
+</body>
+</html>

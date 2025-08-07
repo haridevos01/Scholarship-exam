@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Details</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 700px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .detail {
+            font-size: 1rem;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .document-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .document-link:hover {
+            background-color: #0056b3;
+        }
+
+        .row {
+            margin-bottom: 20px; /* Adds space between rows */
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Scholarship Application Details</h2>
+
+            <h5 class="text-center">Application Status: 
+                <span class="badge bg-info">Pending</span>
+            </h5>
+
+            <!-- All Fields in a Continuous Layout -->
+            <div class="detail"><strong>Full Name:</strong> {{ application.full_name }}</div>
+            <div class="detail"><strong>Guardian Name:</strong> {{ application.guardian_name }}</div>
+            <div class="detail"><strong>Email:</strong> {{ application.email }}</div>
+            <div class="detail"><strong>Phone Number:</strong> {{ application.phone_number }}</div>
+            <div class="detail"><strong>Gender:</strong> {{ application.gender }}</div>
+            <div class="detail"><strong>Date of Birth:</strong> {{ application.dob }}</div>
+            <div class="detail"><strong>School Name:</strong> {{ application.school_name }}</div>
+            <div class="detail"><strong>Grade/Class:</strong> {{ application.grade_class }}</div>
+            <div class="detail"><strong>Academic Score:</strong> {{ application.academic_score }}</div>
+
+            <h4 class="text-center mt-4">Uploaded Documents</h4>
+            <div class="detail"><strong>ID Proof:</strong> 
+                <a href="{{ application.id_proof.url }}" class="document-link" target="_blank">View</a>
+            </div>
+            <div class="detail"><strong>Photo:</strong> 
+                <a href="{{ application.photo.url }}" class="document-link" target="_blank">View</a>
+            </div>
+            <div class="detail"><strong>Income Certificate:</strong> 
+                <a href="{{ application.income_certificate.url }}" class="document-link" target="_blank">View</a>
+            </div>
+            <div class="detail"><strong>Caste Certificate:</strong> 
+                <a href="{{ application.caste_certificate.url }}" class="document-link" target="_blank">View</a>
+            </div>
+            <div class="detail"><strong>Nativity Certificate:</strong> 
+                <a href="{{ application.nativity_certificate.url }}" class="document-link" target="_blank">View</a>
+            </div>
+            <div class="detail"><strong>Signature:</strong> 
+                <a href="{{ application.signature.url }}" class="document-link" target="_blank">View</a>
+            </div>
+            <div class="detail"><strong>Marklist:</strong> 
+                <a href="{{ application.marklist.url }}" class="document-link" target="_blank">View</a>
+            </div>
+
+            <div class="detail"><strong>Submitted On:</strong> {{ application.submitted_on }}</div>
+            <div class="detail"><strong>Last Updated:</strong> {{ application.updated_on }}</div>
+        </div>
+    </div>
+</body>
+</html>

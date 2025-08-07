@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall Ticket</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+
+    <div style="width: 21cm; height: 29.7cm; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border: 2px solid #1576e6;">
+        <h1 style="color: #1576e6; text-align: center; font-size: 28px;">Scholarship Exam Hall Ticket</h1>
+        <hr style="border: 1px solid #1576e6; margin-bottom: 20px;">
+
+        <table style="width: 100%; font-size: 18px; border-collapse: collapse;">
+            <tr>
+                <td style="padding: 10px;"><strong>Student Name:</strong></td>
+                <td style="padding: 10px;">{{ hall_ticket.student_name }}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;"><strong>Roll Number:</strong></td>
+                <td style="padding: 10px;">{{ hall_ticket.roll_number }}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;"><strong>Exam Name:</strong></td>
+                <td style="padding: 10px;">{{ hall_ticket.exam_name }}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;"><strong>Exam Date:</strong></td>
+                <td style="padding: 10px;">{{ hall_ticket.exam_date }}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;"><strong>Exam Time:</strong></td>
+                <td style="padding: 10px;">{{ hall_ticket.exam_time }}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;"><strong>Exam Venue:</strong></td>
+                <td style="padding: 10px;">{{ hall_ticket.venue }}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;"><strong>Seat Number:</strong></td>
+                <td style="padding: 10px;">{{ hall_ticket.seat_number }}</td>
+            </tr>
+        </table>
+
+        <hr style="border: 1px solid #1576e6; margin: 20px 0;">
+
+        <div style="text-align: left; font-size: 18px;">
+            <strong>General Instructions:</strong>
+            <ul>
+                <li>Bring this hall ticket and a valid ID proof.</li>
+                <li>Arrive at the exam venue at least 30 minutes before the exam starts.</li>
+                <li>Electronic devices (mobile phones, calculators, smartwatches) are strictly prohibited inside the exam hall.</li>
+                <li>Maintain silence and follow the invigilator's instructions.</li>
+            </ul>
+        </div>
+
+        <hr style="border: 1px solid #1576e6; margin: 20px 0;">
+
+        <div style="text-align: left; font-size: 18px;">
+            <strong>OMR Exam Instructions:</strong>
+            <ul>
+                <li>Use only a **black or blue ballpoint pen** to fill the OMR sheet.</li>
+                <li>Do not use a pencil, sketch pen, or gel pen.</li>
+                <li>Fill the circles completely and avoid partial marking.</li>
+                <li>Do not overwrite, tick, or cross any response. If marked incorrectly, the answer will not be counted.</li>
+                <li>Ensure your roll number, exam code, and subject code are correctly marked.</li>
+                <li>Do not fold, tear, or make unnecessary marks on the OMR sheet.</li>
+                <li>Submit your OMR sheet before leaving the exam hall.</li>
+            </ul>
+        </div>
+
+        <hr style="border: 1px solid #1576e6; margin: 20px 0;">
+
+        <div style="text-align: center;">
+            <button onclick="window.print()" style="padding: 10px 20px; background-color: #1576e6; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 18px;">Download Hall Ticket</button>
+            <br><br>
+            <a href="{% url 'student_dashboard' %}" style="text-decoration: none; padding: 10px 20px; background-color: #333; color: white; border-radius: 5px; font-size: 18px;">Back to Home</a>
+        </div>
+    </div>
+
+</body>
+</html>

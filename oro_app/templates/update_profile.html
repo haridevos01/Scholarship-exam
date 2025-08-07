@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        /* Close Button (Round) */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: red;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn:hover {
+            background-color: darkred;
+        }
+
+        .container {
+            width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        /* Profile Image Section */
+        .profile-image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ddd;
+        }
+
+        .edit-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background-color: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .edit-icon:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .btn-submit {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Close Button (Round) -->
+    <button class="close-btn" onclick="window.location.href='{% url 'student_dashboard' %}';">X</button>
+
+    <div class="container">
+        <h2>Edit Profile</h2>
+
+        <!-- Profile Image Section -->
+       
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="profile-image-container">
+                <img id="profileImage" src="{{ profile.profile_picture.url|default:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' }}" alt="Profile" class="profile-image">
+                <label for="profilePictureInput" class="edit-icon">✏️</label>
+                <input type="file" id="profilePictureInput" name="profile_picture" accept="image/*" style="display:none;">
+            </div>
+
+            <div class="form-group">
+                <label for="id_full_name">Full Name:</label>
+                <input type="text" id="id_full_name" name="full_name" value="{{ form.full_name.value }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                <input type="email" id="id_email" name="email" value="{{ form.email.value }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_phone">Phone Number:</label>
+                <input type="tel" id="id_phone" name="phone_number" value="{{ form.phone_number.value }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_dob">Date of Birth:</label>
+                <input type="date" id="id_dob" name="dob" value="{{ form.dob.value }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id_address">Address:</label>
+                <textarea id="id_address" name="address" rows="3" required>{{ form.address.value }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="id_gender">Gender:</label>
+                <select id="id_gender" name="gender" required>
+                    <option value="Male" {% if form.gender.value == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if form.gender.value == "Female" %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if form.gender.value == "Other" %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="id_school">School Name:</label>
+                <input type="text" id="id_school" name="school_name" value="{{ form.school_name.value }}" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Update</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('profilePictureInput').addEventListener('change', function(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('profileImage').src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+    </script>
+
+</body>
+</html>

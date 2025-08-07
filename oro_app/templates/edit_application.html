@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Application Form</title>
+    <style>
+        /* Background Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://th.bing.com/th/id/R.1c465e1550d8340439feb095b002b2fc?rik=9jaWhPz3Bx0rWA&riu=http%3a%2f%2fimg.emg-services.net%2fhtmlpages%2fhtmlpage20540%2funtitled-design-28.jpg&ehk=a5i4qM7JGAK%2faFdlNWIKhkZSHv0WzhRpk0x3MZEnSEY%3d&risl=&pid=ImgRaw&r=0') 
+                no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Dark Overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 3;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 0, 0, 0.8);
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Form Title */
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Section Titles */
+        h3 {
+            border-left: 5px solid #007BFF;
+            padding-left: 10px;
+            color: #007BFF;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        /* Input Fields */
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hover & Focus Effects */
+        input:focus, select:focus, textarea:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Gender Radio Buttons */
+        .gender-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .gender-options label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            gap: 5px;
+            color: #333;
+        }
+
+        /* File Upload */
+        input[type="file"] {
+            background-color: #f8f8f8;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #218838;
+        }
+
+        /* Error Messages */
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <button class="close-btn" onclick="closePage()">×</button>
+    <div class="form-container">
+
+        {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+        <h2>EDIT APPLICATION FORM</h2>
+       
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+    
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="id_full_name">Full Name:</label>
+                {{ form.full_name }}
+                {% if form.full_name.errors %}<div class="error">{{ form.full_name.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_address">Address:</label>
+                {{ form.address }}
+                {% if form.address.errors %}<div class="error">{{ form.address.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_dob">Date of Birth:</label>
+                {{ form.dob }}
+                {% if form.dob.errors %}<div class="error">{{ form.dob.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_guardian_name">Guardian Name:</label>
+                {{ form.guardian_name }}
+                {% if form.guardian_name.errors %}<div class="error">{{ form.guardian_name.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+                {% if form.email.errors %}<div class="error">{{ form.email.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_phone_number">Phone Number:</label>
+                {{ form.phone_number }}
+                {% if form.phone_number.errors %}<div class="error">{{ form.phone_number.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_gender">Gender:</label>
+                {{ form.gender }}
+                {% if form.gender.errors %}<div class="error">{{ form.gender.errors }}</div>{% endif %}
+            </div>
+    
+            <!-- Academic Details -->
+            <div class="form-group">
+                <label for="id_school_name">School/College Name:</label>
+                {{ form.school_name }}
+                {% if form.school_name.errors %}<div class="error">{{ form.school_name.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_grade_class">Grade/Class/Year:</label>
+                {{ form.grade_class }}
+                {% if form.grade_class.errors %}<div class="error">{{ form.grade_class.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_academic_score">Previous Academic Scores:</label>
+                {{ form.academic_score }}
+                {% if form.academic_score.errors %}<div class="error">{{ form.academic_score.errors }}</div>{% endif %}
+            </div>
+    
+            <!-- Uploaded Documents -->
+            <div class="form-group">
+                <label for="id_id_proof">ID Proof:</label>
+                {{ form.id_proof }}
+                {% if form.id_proof.errors %}<div class="error">{{ form.id_proof.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_photo">Photograph:</label>
+                {{ form.photo }}
+                {% if form.photo.errors %}<div class="error">{{ form.photo.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_income_certificate">Income Certificate:</label>
+                {{ form.income_certificate }}
+                {% if form.income_certificate.errors %}<div class="error">{{ form.income_certificate.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_caste_certificate">Caste Certificate:</label>
+                {{ form.caste_certificate }}
+                {% if form.caste_certificate.errors %}<div class="error">{{ form.caste_certificate.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_nativity_certificate">Nativity Certificate:</label>
+                {{ form.nativity_certificate }}
+                {% if form.nativity_certificate.errors %}<div class="error">{{ form.nativity_certificate.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_signature">Signature:</label>
+                {{ form.signature }}
+                {% if form.signature.errors %}<div class="error">{{ form.signature.errors }}</div>{% endif %}
+            </div>
+    
+            <div class="form-group">
+                <label for="id_marklist">Marklist:</label>
+                {{ form.marklist }}
+                {% if form.marklist.errors %}<div class="error">{{ form.marklist.errors }}</div>{% endif %}
+            </div>
+    
+            <button type="submit" class="submit-btn">Update Application</button>
+        </form>
+
+    </div>
+    <script>
+        function closePage() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

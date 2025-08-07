@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Oro Scholarship</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('https://img.freepik.com/free-photo/medium-shot-graduate-student_23-2148950577.jpg?t=st=1738141999~exp=1738145599~hmac=fa32b215b2d2bb67cd658dde7366f69b93b0865a511c9c23c63c4b305f8d0651&w=1380');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: rgb(21, 112, 216);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin-left: 20px;
+        }
+
+        header .profile-section {
+            display: flex;
+            align-items: center;
+            cursor: pointer; /* Makes the profile clickable */
+        }
+
+        header .profile-section img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid white;
+        }
+
+        .logout-btn {
+            padding: 10px 15px;
+            background-color: #e60000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: auto;
+        }
+
+        .logout-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* Grid Layout */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        .card-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        section h2 {
+            color: #1576e6;
+            margin-bottom: 10px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #1576e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        /* Special Styles for All Cards - Same Style as Apply for Scholarship Card */
+        section {
+            background-color: #f2f2f2;
+            border-left: 5px solid #1576e6;  /* Same blue border */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="profile-section" onclick="location.href='{% url 'student_profile' %}';">
+            <img id="profileImage" 
+         src="{{ profile.profile_picture.url|default:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' }}" 
+         alt="Profile Photo" 
+         class="profile-image">
+            <p>{{ user.username }}</p>
+        </div>
+        <h1>STUDENT DASHBOARD</h1>
+        <button class="logout-btn">Logout</button>
+    </header>
+
+    <main>
+        <div class="card-row">
+            <!-- Apply for Scholarship Card -->
+            <section id="apply-scholarship">
+                <h2>APPLY FOR SCHOLARSHIP</h2>
+                <p>Start your application today and get financial assistance for your studies.</p>
+                <button onclick="location.href='{% url 'apply_scholarship' %}';">Apply Now</button>
+            </section>
+
+            <!-- Application Status Card -->
+            <section id="application-status">
+                <h2>APPLICATION STATUS</h2>
+                <p>Status: <strong>Submitted</strong></p>
+                <a href="{% url 'application_management' %}">
+                    <button>View/Update Application</button>
+                </a>
+            </section>
+
+            <section id="exam-details">
+                <h2>UPCOMING EXAMS</h2>
+                <p>Date: <strong>10th March 2025</strong></p>
+                <p>Time: <strong>10:00 AM</strong></p>
+                <p>Location: <strong>Online</strong></p>
+                <p>Days Remaining: <strong>15</strong> days</p>
+                <button onclick="location.href='{% url 'exam_page' %}';">View Syllabus</button>
+            </section>
+
+            <section id="results">
+                <h2>EXAM RESULTS</h2>
+                <p>Status: <strong>Pending</strong></p>
+                <button onclick="location.href='{% url 'exam_result' %}';">View Result</button>
+            </section>
+        </div>
+
+        <div class="card-row">
+            <section id="notifications">
+                <h2>NOTIFICATIONS</h2>
+                {% comment %} <p>Keep track of important updates:</p>
+                <ul>
+                    <li>Application deadline: 5th March.</li>
+                    <li>New study materials available.</li>
+                    <li>Exam instructions shared soon.</li> {% endcomment %}
+                    <button onclick="location.href='{% url 'student_notification' %}';" 
+                    style="
+                        background-color: #007bff;
+                        color: white;
+                        border: none;
+                        padding: 12px 20px;
+                        font-size: 16px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        font-weight: bold;
+                    ">
+                    
+                    {% if notification_count > 0 %}
+                        <span style="margin-right: 8px;">🔔</span> <!-- Show Alert Symbol Only if New Messages Exist -->
+                    {% endif %}
+                    
+                    View Notifications
+                
+                    {% if notification_count > 0 %}
+                        <span style="
+                            background-color: red;
+                            color: white;
+                            font-size: 12px;
+                            font-weight: bold;
+                            border-radius: 50%;
+                            width: 20px;
+                            height: 20px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
+                            top: -5px;
+                            right: -5px;
+                        ">
+                            {{ notification_count }}
+                        </span>
+                    {% endif %}
+                </button>
+                
+                
+                {% comment %} </ul> {% endcomment %}
+            </section>
+
+            <section id="resources">
+                <h2>RESOURCES & FAQs</h2>
+                <p>Access important study materials and find answers to common queries regarding the scholarship process.</p>
+                <button onclick="location.href='https://example.com/study-materials.zip'">Download Study Materials</button>
+                <button onclick="location.href='{% url 'faq_page' %}'">View FAQs</button>
+            </section>
+
+            <section id="support">
+                <h2>Need Help?</h2>
+                <p>If you have any questions, contact us:</p>
+                <p>Email: <a href="mailto:support@oroscholarship.com">support@oroscholarship.com</a></p>
+            </section>
+
+            <section id="payment">
+                <h2>PAYMENT</h2>
+                <p>Payment Status: <strong>Pending</strong></p>
+                <p>Amount Due: <strong>200 RS</strong></p>
+                <button onclick="window.location.href='{% url 'payment' %}'">Make Payment</button>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Oro Scholarship Program, All rights reserved</p>
+    </footer>
+</body>
+</html>

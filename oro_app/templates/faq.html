@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Oro Scholarship Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        .closebar {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        .faq {
+            margin-top: 20px;
+        }
+        .faq button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            text-align: left;
+        }
+        .faq button:hover {
+            background-color: #0056b3;
+        }
+        .faq p {
+            display: none;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="closebar" onclick="closePage()">&times;</div>
+    <div class="container">
+        <h1>Frequently Asked Questions</h1>
+        
+        <div class="faq">
+            <button onclick="toggleFAQ(0)">1. What is the Oro Scholarship Exam?</button>
+            <p>The Oro Scholarship Exam is a competitive exam designed to provide financial aid to deserving students based on merit.</p>
+        </div>
+        
+        <div class="faq">
+            <button onclick="toggleFAQ(1)">2. Who is eligible to apply?</button>
+            <p>Students from various educational backgrounds who meet the eligibility criteria can apply for the scholarship.</p>
+        </div>
+        
+        <div class="faq">
+            <button onclick="toggleFAQ(2)">3. How can I apply?</button>
+            <p>You can apply through our official website by filling out the online application form.</p>
+        </div>
+        
+        <div class="faq">
+            <button onclick="toggleFAQ(3)">4. What documents are required?</button>
+            <p>You will need identity proof, academic mark sheet, income certificate, and other relevant documents.</p>
+        </div>
+        
+        <div class="faq">
+            <button onclick="toggleFAQ(4)">5. When will the results be announced?</button>
+            <p>The results will be published on the official website after evaluation.</p>
+        </div>
+        
+        <div class="faq">
+            <button onclick="toggleFAQ(5)">6. How is the exam conducted?</button>
+            <p>The exam is conducted online and consists of multiple-choice questions covering various subjects.</p>
+        </div>
+
+        <div class="faq">
+            <button onclick="toggleFAQ(6)">7. Can I reapply if I am not selected?</button>
+            <p>Yes, students who are not selected can apply again in the next scholarship cycle.</p>
+        </div>
+        
+        <div class="faq">
+            <button onclick="toggleFAQ(7)">8. Is there any application fee?</button>
+            <p>No, there is no application fee for the Oro Scholarship Exam.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleFAQ(index) {
+            var answers = document.querySelectorAll('.faq p');
+            if (answers[index].style.display === 'block') {
+                answers[index].style.display = 'none';
+            } else {
+                answers[index].style.display = 'block';
+            }
+        }
+        
+        function goBack() {
+            window.location.href = "{% url 'student_dashboard' %}"; 
+        }
+    </script>
+</body>
+</html>

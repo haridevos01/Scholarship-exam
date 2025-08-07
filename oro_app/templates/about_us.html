@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ORO SCHOLARSHIP</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body id="pageBody">
+    <!-- Close Bar for Entire Page -->
+    <div class="close-bar" id="closeBar">
+        <button class="close-button" onclick="closePage()">✖</button>
+    </div>
+
+    <header>
+        <h1>ORO SCHOLARSHIP EXAM</h1>
+    </header>
+
+    <div class="about-container">
+        <div class="about-card">
+            <h2>About Us</h2>
+            <p>The Oro Scholarship Exam 2025 is an initiative designed to provide financial assistance to academically talented students who face economic challenges in pursuing higher education. This scholarship aims to identify and reward individuals with exceptional potential across various academic disciplines, ensuring they have the resources to achieve their educational and professional goals. By offering comprehensive support, including coverage of tuition fees, allowances for books, and other academic expenses, the program strives to eliminate financial barriers that may hinder deserving students. Applicants are typically assessed through a rigorous examination that evaluates their knowledge in subjects like Mathematics, Science, English, and General Knowledge, alongside critical thinking and problem-solving skills. Priority is often given to students with strong academic records and those from low-income families.Successful candidates not only gain financial support but also receive recognition, which can open doors to further opportunities such as mentoring and career development. This scholarship serves as a beacon of hope for students, empowering them to excel academically and contribute meaningfully to their communities.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Oro Scholarship Exam. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function closePage() {
+            const body = document.getElementById("pageBody");
+            body.style.display = "none"; // Hide the entire page content
+        }
+    </script>
+</body>
+</html>
